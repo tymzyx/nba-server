@@ -9,6 +9,8 @@ const morgan = require('morgan');
 
 let config = require('./config/config');
 
+let router = require('./app/routes/index');
+
 let app = express();
 
 app.all('*', (req, res, next) => {
@@ -36,6 +38,8 @@ app.use(bodyParser.json());
 
 // 使用morgan将请求日志打印到控制台
 app.use(morgan('dev'));
+
+router.router(app);
 
 app.listen(port);
 console.log('Magic happens at http://localhost:' + port);
