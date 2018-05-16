@@ -11,6 +11,17 @@ class Acquire {
 
     getPlayer(req, res) {
         console.log('getPlayer is to do');
+        let {playerId} = req.query;
+        Player.findOne({playerId: playerId}, function(err, player) {
+            if (err) {
+                res.send({
+                    code: '0',
+                    name: 'ERROR_FIND',
+                    message: err,
+                });
+            }
+            res.send(player);
+        });
     }
 
     async getRank(req, res) {
